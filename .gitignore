@@ -8,3 +8,32 @@ Thumbs.db
 *.egg-info/
 .pytest_cache/
 .mypy_cache/
+
+# Datasets (LIDC-IDRI, IQ-OTH/NCCD, etc.) — keep local only
+data/
+!data/.gitkeep
+
+# Model weights / serialized objects
+*.pt
+*.pth
+*.npy
+*.pkl
+*.joblib
+*.onnx
+*.h5
+*.ckpt
+
+# Generated pipeline outputs (crops, splits caches, zips)
+outputs/
+!outputs/**/.gitkeep
+
+# Grad-CAM heatmaps (regenerable); keep folder placeholders
+gradcam/**/*.png
+gradcam/**/*.jpg
+gradcam/**/*.jpeg
+!gradcam/**/.gitkeep
+
+# DICOM / medical imaging binaries if they appear outside data/
+*.dcm
+*.nii
+*.nii.gz

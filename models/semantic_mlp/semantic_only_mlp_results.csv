@@ -1,0 +1,2 @@
+model,accuracy,auc,precision,sensitivity,specificity,f1,tn,fp,fn,tp
+Semantic-only MLP,0.7142857142857143,0.9166666666666667,1.0,0.3333333333333333,1.0,0.5,8,0,4,2

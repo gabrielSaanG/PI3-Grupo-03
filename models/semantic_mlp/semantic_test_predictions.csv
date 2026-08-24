@@ -1,0 +1,15 @@
+test_row_id,patient_id,label,malignancy_mean,crop_path,semantic_prob,semantic_pred_05,semantic_pred_youden,semantic_correct_05,semantic_correct_youden
+0,LIDC-IDRI-0005,0,2.0,C:\Users\Administrator\Documents\Biopark\Projeto-Integrador-3\PI3-Grupo-03\outputs\crops_fixed_v2\nodule_00004_label_0_mal_2.00.npy,0.39960104,0,0,True,True
+1,LIDC-IDRI-0016,1,4.0,C:\Users\Administrator\Documents\Biopark\Projeto-Integrador-3\PI3-Grupo-03\outputs\crops_fixed_v2\nodule_00016_label_1_mal_4.00.npy,0.44455788,0,0,False,False
+2,LIDC-IDRI-0016,1,4.5,C:\Users\Administrator\Documents\Biopark\Projeto-Integrador-3\PI3-Grupo-03\outputs\crops_fixed_v2\nodule_00017_label_1_mal_4.50.npy,0.5421782,1,1,True,True
+3,LIDC-IDRI-0037,1,4.0,C:\Users\Administrator\Documents\Biopark\Projeto-Integrador-3\PI3-Grupo-03\outputs\crops_fixed_v2\nodule_00029_label_1_mal_4.00.npy,0.5097282,1,1,True,True
+4,LIDC-IDRI-0049,0,2.0,C:\Users\Administrator\Documents\Biopark\Projeto-Integrador-3\PI3-Grupo-03\outputs\crops_fixed_v2\nodule_00031_label_0_mal_2.00.npy,0.3791717,0,0,True,True
+5,LIDC-IDRI-0049,0,1.5,C:\Users\Administrator\Documents\Biopark\Projeto-Integrador-3\PI3-Grupo-03\outputs\crops_fixed_v2\nodule_00032_label_0_mal_1.50.npy,0.39591265,0,0,True,True
+6,LIDC-IDRI-0049,0,1.5,C:\Users\Administrator\Documents\Biopark\Projeto-Integrador-3\PI3-Grupo-03\outputs\crops_fixed_v2\nodule_00033_label_0_mal_1.50.npy,0.45328552,0,1,True,False
+7,LIDC-IDRI-0049,0,1.6666666666666667,C:\Users\Administrator\Documents\Biopark\Projeto-Integrador-3\PI3-Grupo-03\outputs\crops_fixed_v2\nodule_00034_label_0_mal_1.67.npy,0.401036,0,0,True,True
+8,LIDC-IDRI-0049,0,2.0,C:\Users\Administrator\Documents\Biopark\Projeto-Integrador-3\PI3-Grupo-03\outputs\crops_fixed_v2\nodule_00035_label_0_mal_2.00.npy,0.4712967,0,1,True,False
+9,LIDC-IDRI-0042,0,2.0,C:\Users\Administrator\Documents\Biopark\Projeto-Integrador-3\PI3-Grupo-03\outputs\crops_fixed_v2\nodule_00041_label_0_mal_2.00.npy,0.37500766,0,0,True,True
+10,LIDC-IDRI-0045,1,4.0,C:\Users\Administrator\Documents\Biopark\Projeto-Integrador-3\PI3-Grupo-03\outputs\crops_fixed_v2\nodule_00065_label_1_mal_4.00.npy,0.46657813,0,1,False,True
+11,LIDC-IDRI-0045,1,4.0,C:\Users\Administrator\Documents\Biopark\Projeto-Integrador-3\PI3-Grupo-03\outputs\crops_fixed_v2\nodule_00066_label_1_mal_4.00.npy,0.4911203,0,1,False,True
+12,LIDC-IDRI-0045,0,1.5,C:\Users\Administrator\Documents\Biopark\Projeto-Integrador-3\PI3-Grupo-03\outputs\crops_fixed_v2\nodule_00067_label_0_mal_1.50.npy,0.39675784,0,0,True,True
+13,LIDC-IDRI-0045,1,4.5,C:\Users\Administrator\Documents\Biopark\Projeto-Integrador-3\PI3-Grupo-03\outputs\crops_fixed_v2\nodule_00068_label_1_mal_4.50.npy,0.45902577,0,1,False,True

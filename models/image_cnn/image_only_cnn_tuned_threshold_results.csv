@@ -1,0 +1,2 @@
+model,threshold,accuracy,auc,precision,sensitivity,specificity,f1,tn,fp,fn,tp
+Image-only CNN tuned threshold,0.5008238554000854,0.35714285714285715,0.2708333333333333,0.0,0.0,0.625,0.0,5,3,6,0
