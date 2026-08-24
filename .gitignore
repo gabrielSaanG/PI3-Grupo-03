@@ -37,3 +37,6 @@ gradcam/**/*.jpeg
 *.dcm
 *.nii
 *.nii.gz
+
+# Local notes / exports (Notion, personal annotations)
+docs/anotations/
