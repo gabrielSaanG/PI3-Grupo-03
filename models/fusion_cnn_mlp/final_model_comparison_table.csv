@@ -1,0 +1,6 @@
+model,threshold_type,threshold,accuracy,auc,precision,sensitivity,specificity,f1,tn,fp,fn,tp
+Semantic-only MLP,default_0.5,0.5,0.8889,0.9666,0.75,0.9643,0.8548,0.8438,53,9,1,27
+Image-only CNN,default_0.5,0.5,0.8,0.8825,0.8571,0.4286,0.9677,0.5714,60,2,16,12
+Image-only CNN,validation_youden_j,0.0822,0.8222,0.8825,0.6875,0.7857,0.8387,0.7333,52,10,6,22
+Fusion CNN-MLP,default_0.5,0.5,0.9444,0.974654,0.8966,0.9286,0.9516,0.9123,59,3,2,26
+Fusion CNN-MLP,validation_youden_j,0.2699,0.9222,0.974654,0.8182,0.9643,0.9032,0.8852,56,6,1,27
