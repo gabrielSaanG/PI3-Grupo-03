@@ -1,3 +1,3 @@
 model,threshold_type,threshold,accuracy,auc,precision,sensitivity,specificity,f1,tn,fp,fn,tp
-Fusion CNN-MLP,default_0.5,0.5,0.5714285714285714,0.6875,0.0,0.0,1.0,0.0,8,0,6,0
-Fusion CNN-MLP,validation_youden_j,0.4851718246936798,0.5714285714285714,0.6875,0.0,0.0,1.0,0.0,8,0,6,0
+Fusion CNN-MLP,default_0.5,0.5,0.0,,0.0,0.0,0.0,0.0,0,0,3,0
+Fusion CNN-MLP,validation_youden_j,0.4811529815196991,1.0,,1.0,1.0,0.0,1.0,0,0,0,3
