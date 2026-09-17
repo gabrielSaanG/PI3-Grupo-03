@@ -9,3 +9,5 @@ torchvision
 scikit-learn
 opencv-python
 pydicom
+captum
+scipy

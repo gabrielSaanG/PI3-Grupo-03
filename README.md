@@ -34,6 +34,15 @@ O projeto não busca apenas verificar se o modelo acerta, mas também analisar *
 
 Neste momento, o grupo está concentrado na **fundamentação teórica, organização do projeto e preparação dos dados e ferramentas**.
 
+**Notebooks**
+
+| Notebook | Conteúdo |
+|----------|----------|
+| [`notebooks/01-lung-nodule-malignancy-classification.ipynb`](notebooks/01-lung-nodule-malignancy-classification.ipynb) | Pipeline LIDC + modelos baseline do grupo |
+| [`notebooks/03-resnet50-sprint3.ipynb`](notebooks/03-resnet50-sprint3.ipynb) | Contribuição **André** (Sprint 3): ResNet50 + Grad-CAM + sanidade / IG |
+
+Artefatos do notebook do André: `models/resnet50/`, `gradcam/resnet50/`, `outputs/sprint3/`.
+
 ---
 
 ## 🗂️ Dataset
