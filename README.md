@@ -30,43 +30,48 @@ O projeto não busca apenas verificar se o modelo acerta, mas também analisar *
 
 ## 🧪 Estado atual do projeto
 
-**Status: 🟡 Em desenvolvimento / Fase de estudo**
+**Status: Em desenvolvimento — foco Grad-CAM por CNN**
 
-Neste momento, o grupo está concentrado na **fundamentação teórica, organização do projeto e preparação dos dados e ferramentas**.
+O fluxo principal compara arquiteturas de CNN em crops LIDC 64×64 e gera mapas Grad-CAM por *slot*.
 
-**Notebooks**
+| Slot | Notebook | Artefatos |
+|------|----------|-----------|
+| `custom_cnn` | [`notebooks/01-custom-cnn.ipynb`](notebooks/01-custom-cnn.ipynb) | `models/custom_cnn/`, `gradcam/custom_cnn/` |
+| `resnet18` | [`notebooks/02-resnet18.ipynb`](notebooks/02-resnet18.ipynb) (stub) | `models/resnet18/`, `gradcam/resnet18/` |
+| `efficientnet_b0` | [`notebooks/03-efficientnet-b0.ipynb`](notebooks/03-efficientnet-b0.ipynb) (stub) | `models/efficientnet_b0/`, `gradcam/efficientnet_b0/` |
+| ResNet50 (André) | [`notebooks/03-resnet50-sprint3.ipynb`](notebooks/03-resnet50-sprint3.ipynb) | `models/resnet50/`, `gradcam/resnet50/`, `outputs/sprint3/` |
 
-| Notebook | Conteúdo |
-|----------|----------|
-| [`notebooks/01-lung-nodule-malignancy-classification.ipynb`](notebooks/01-lung-nodule-malignancy-classification.ipynb) | Pipeline LIDC + modelos baseline do grupo |
-| [`notebooks/03-resnet50-sprint3.ipynb`](notebooks/03-resnet50-sprint3.ipynb) | Contribuição **André** (Sprint 3): ResNet50 + Grad-CAM + sanidade / IG |
+O notebook longo de baseline continua em [`notebooks/01-lung-nodule-malignancy-classification.ipynb`](notebooks/01-lung-nodule-malignancy-classification.ipynb). Uma cópia anterior está em [`notebooks/archive/`](notebooks/archive/).
 
-Artefatos do notebook do André: `models/resnet50/`, `gradcam/resnet50/`, `outputs/sprint3/`.
+Contrato por slot: `best_model.pth`, `training_history.csv`, `test_predictions.csv`, `test_results.csv` em `models/<slot>/`; overlays em `gradcam/<slot>/`.
+
+O notebook monolítico antigo (semantic + fusion + SHAP) está em [`notebooks/archive/`](notebooks/archive/). O pacote reutilizável de Grad-CAM fica em [`src/xai/`](src/xai/).
 
 ---
 
 ## 🗂️ Dataset
 
-O dataset principal definido para o projeto é o **LIDC-IDRI (Lung Image Database Consortium and Image Database Resource Initiative)**.
+O dataset principal é o **LIDC-IDRI**. Os arquivos brutos **não** entram no Git (`data/` no `.gitignore`).
 
-Ele possui exames de tomografia computadorizada de tórax com anotações realizadas por radiologistas e utiliza o formato **DICOM**. O dataset será utilizado como base para os experimentos de classificação e explicabilidade.
+O pipeline usa crops 64×64 dos nódulos em `outputs/crops/` (compartilhados entre slots). DICOM pode ser apagado depois da extração.
 
-> ⚠️ Os arquivos do dataset não serão armazenados diretamente neste repositório devido ao seu grande tamanho.
-
-O LIDC-IDRI completo tem ~133 GB. Para expandir em lotes (sem baixar tudo):
+Para aumentar o conjunto em lotes (recomendado: 25 pacientes, teto de ~8 GB):
 
 ```text
 python scripts/expand_lidc_dataset.py plan --batch-size 25 --max-gb 8
 python scripts/expand_lidc_dataset.py run --batch-size 25 --max-gb 8
 ```
 
-Isso baixa CT de um lote, extrai crops 64×64 em `outputs/crops/` e apaga os DICOMs. Depois:
+O comando `run` baixa o XML oficial, baixa só CT dos próximos pacientes, extrai crops e apaga DICOMs. Pacientes listados em `gradcam/*/gradcam_selected_cases.csv` podem ser preservados com `--keep-xai-patients`.
 
-```text
-python scripts/train_from_crops.py
-```
+**Como rodar o experimento principal:**
 
-Ou **Run All** em `notebooks/02-train-from-crops.ipynb`.
+1. Abra `notebooks/01-custom-cnn.ipynb` e execute **Run All** (treino ImageCNN + Grad-CAM).
+2. Se `models/custom_cnn/best_model.pth` já existir, o treino é pulado automaticamente.
+
+Legacy (semantic / image / fusion multi-modelo): `scripts/train_from_crops.py` e `notebooks/02-train-from-crops.ipynb` — fora do fluxo Grad-CAM por slot.
+
+Comandos avulsos do expand: `download-xml`, `download`, `extract`, `cleanup`. Use `--dry-run` para ver o lote sem baixar.
 
 ---
 

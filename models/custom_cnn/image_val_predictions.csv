@@ -1,0 +1,4 @@
+val_row_id,patient_id,label,malignancy_mean,image_prob,image_pred_05,image_pred_youden,image_correct_05,image_correct_youden
+0,LIDC-IDRI-0012,0,2.0,0.48581386,0,1,True,False
+1,LIDC-IDRI-0012,0,2.0,0.4866429,0,1,True,False
+2,LIDC-IDRI-0002,1,4.5,0.48535848,0,1,False,True
