@@ -53,6 +53,21 @@ Ele possui exames de tomografia computadorizada de tórax com anotações realiz
 
 > ⚠️ Os arquivos do dataset não serão armazenados diretamente neste repositório devido ao seu grande tamanho.
 
+O LIDC-IDRI completo tem ~133 GB. Para expandir em lotes (sem baixar tudo):
+
+```text
+python scripts/expand_lidc_dataset.py plan --batch-size 25 --max-gb 8
+python scripts/expand_lidc_dataset.py run --batch-size 25 --max-gb 8
+```
+
+Isso baixa CT de um lote, extrai crops 64×64 em `outputs/crops/` e apaga os DICOMs. Depois:
+
+```text
+python scripts/train_from_crops.py
+```
+
+Ou **Run All** em `notebooks/02-train-from-crops.ipynb`.
+
 ---
 
 ## 🔬 Abordagem planejada
