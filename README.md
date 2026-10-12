@@ -39,6 +39,9 @@ O fluxo principal compara arquiteturas de CNN em crops LIDC 64×64 e gera mapas 
 | `custom_cnn` | [`notebooks/01-custom-cnn.ipynb`](notebooks/01-custom-cnn.ipynb) | `models/custom_cnn/`, `gradcam/custom_cnn/` |
 | `resnet18` | [`notebooks/02-resnet18.ipynb`](notebooks/02-resnet18.ipynb) (stub) | `models/resnet18/`, `gradcam/resnet18/` |
 | `efficientnet_b0` | [`notebooks/03-efficientnet-b0.ipynb`](notebooks/03-efficientnet-b0.ipynb) (stub) | `models/efficientnet_b0/`, `gradcam/efficientnet_b0/` |
+| ResNet50 (André) | [`notebooks/03-resnet50-sprint3.ipynb`](notebooks/03-resnet50-sprint3.ipynb) | `models/resnet50/`, `gradcam/resnet50/`, `outputs/sprint3/` |
+
+O notebook longo de baseline continua em [`notebooks/01-lung-nodule-malignancy-classification.ipynb`](notebooks/01-lung-nodule-malignancy-classification.ipynb). Uma cópia anterior está em [`notebooks/archive/`](notebooks/archive/).
 
 Contrato por slot: `best_model.pth`, `training_history.csv`, `test_predictions.csv`, `test_results.csv` em `models/<slot>/`; overlays em `gradcam/<slot>/`.
 

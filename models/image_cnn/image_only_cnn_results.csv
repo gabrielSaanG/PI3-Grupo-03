@@ -1,2 +1,2 @@
 model,accuracy,auc,precision,sensitivity,specificity,f1,tn,fp,fn,tp
-Image-only CNN,0.0,,0.0,0.0,0,0.0,0,0,3,0
+Image-only CNN,1.0,,1.0,1.0,0.0,1.0,0,0,0,3
