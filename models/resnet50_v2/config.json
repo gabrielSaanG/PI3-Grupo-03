@@ -1,0 +1,30 @@
+{
+  "base": "torchvision resnet50, ImageNet weights, fc -> 2",
+  "split": "559 patients (391/84/84), seed 42 (same as notebook)",
+  "label": "mean malignancy of readers on the same physical nodule >= 3.5",
+  "physical_nodule": "reader ROIs with overlapping bounding boxes on the same slice, union-find",
+  "ambiguous": "2.5 < mean < 3.5, excluded from train and validation",
+  "crop": "64.0 mm square around ROI centre, resized to 224, window [-1000.0, 400.0] HU",
+  "augmentation": "rot90, horizontal flip, shift up to 12 px",
+  "loss": "cross-entropy with balanced class weights",
+  "class_weights": [
+    1.267910447761194,
+    0.82555879494655
+  ],
+  "optimizer": "AdamW",
+  "lr": 0.0001,
+  "weight_decay": 0.0001,
+  "scheduler": "cosine",
+  "batch_size": 16,
+  "amp": true,
+  "epochs_max": 12,
+  "patience": 4,
+  "selection": "best validation AUC at reader-nodule level",
+  "best_epoch": 1,
+  "best_val_auc_nodule": 0.9220236765691312,
+  "train_patches": 11893,
+  "val_patches": 2638,
+  "seed": 42,
+  "torch": "2.11.0+cu128",
+  "gpu": "NVIDIA GeForce RTX 3050 Laptop GPU"
+}
