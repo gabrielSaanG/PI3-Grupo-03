@@ -35,7 +35,7 @@ from torch.utils.data import DataLoader, Dataset
 from torchvision import models
 
 ROOT = Path(__file__).resolve().parents[1]
-NOTEBOOK = ROOT / "notebooks" / "03-resnet50-sprint3.ipynb"
+NOTEBOOK = ROOT / "archive" / "notebooks" / "03-resnet50-sprint3.ipynb"
 SPLIT_SUMMARY = ROOT / "outputs" / "sprint3" / "split_summary.csv"
 DICOM_INDEX = ROOT / "outputs" / "sprint3" / "dicom_index.csv"
 RESNET_CKPT = ROOT / "models" / "resnet50" / "resnet50_sprint3_best.pth"

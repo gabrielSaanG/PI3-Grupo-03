@@ -234,7 +234,8 @@ Para o resultado oficial, o arquivo do André precisa ter uma linha por patch de
 - [ ] v2: mais seeds ou ensemble e mais regularização, porque a melhor época foi a 1 (sinal de overfitting rápido). Testar recortes de vários tamanhos por causa dos nódulos pequenos.
 - [ ] Avaliar por nódulo físico (275 no teste), em vez de por nódulo de leitor.
 - [x] Explicabilidade mínima no v2: Grad-CAM, IG, aleatório e centrado; IoU, Dice e Pointing Game; limiar da validação; separação por acerto e por tamanho.
-- [ ] Explicabilidade: o teste de Adebayo no v2; investigar por que o Grad-CAM marca a pleura (atalho de contexto?); usar a união das máscaras dos leitores; comparar com a análise da Débora.
-- [ ] Conferir slides e documentos contra a tabela de registro do Wesley (acurácia oficial única e 559 pacientes em todo lugar).
-- [ ] Rodar de novo o teste de rótulos embaralhados na divisão de 559, permutando por paciente e medindo o desempenho no teste.
+- [x] Explicabilidade: o teste de Adebayo no v2 e a investigação da pleura (feitos na Sprint 6, ver `docs/sprint6/gabriel_sprint6.md`).
+- [ ] Explicabilidade: usar a união das máscaras dos leitores; comparar com a análise da Débora.
+- [ ] Conferir slides e documentos contra a tabela de registro do Wesley (acurácia oficial única e 559 pacientes em todo lugar). Conferência do repositório em `docs/sprint6/conferencia_registro.md`; falta a tabela e os slides.
+- [x] Rodar de novo o teste de rótulos embaralhados na divisão de 559, medindo o desempenho no teste (Sprint 6, permutando por nódulo físico).
 - [ ] Passar estes resultados para a tabela de registro do Wesley como "provisório".
