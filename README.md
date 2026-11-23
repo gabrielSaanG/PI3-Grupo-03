@@ -1,157 +1,74 @@
 # Projeto Integrador III — Grupo 3
 
-## Explicabilidade e Visualização em Imagens de Câncer de Pulmão
+## Explicabilidade em nódulos pulmonares (LIDC-IDRI)
 
-Projeto desenvolvido no **Projeto Integrador III**, com foco na utilização de técnicas de **Explainable Artificial Intelligence (XAI)** para analisar e visualizar as decisões de modelos de Inteligência Artificial aplicados à detecção/classificação de nódulos pulmonares em imagens de tomografia computadorizada (TC).
+**Pergunta que o projeto responde:**
 
----
+> As regiões que o modelo destaca para classificar um nódulo pulmonar correspondem ao nódulo anotado pelos radiologistas?
 
-## 📌 Resumo
-
-O projeto busca investigar como modelos de Inteligência Artificial podem auxiliar na análise de imagens de TC para detecção de nódulos pulmonares e, principalmente, **como explicar as decisões tomadas por esses modelos**.
-
-O **Grupo 3** é responsável pela parte de **Explicabilidade e Visualização**, tendo como objetivo investigar se as regiões destacadas pelos modelos realmente correspondem às regiões relevantes dos nódulos pulmonares.
-
-A abordagem definida inicialmente envolve o uso do dataset **LIDC-IDRI**, modelos de classificação e técnicas de XAI, tendo o **Grad-CAM** como principal método de referência. Posteriormente, será realizada uma comparação com pelo menos uma técnica adicional, como **SHAP, Integrated Gradients ou LIME**.
-
-A avaliação deverá considerar não apenas a visualização dos mapas de calor, mas também métricas como **IoU**, teste de sanidade de **Adebayo** e **Expected Calibration Error (ECE)**.
+Entrada única da entrega: [`notebooks/pipeline_entrega.ipynb`](notebooks/pipeline_entrega.ipynb).
 
 ---
 
-## 🎯 Objetivo
-
-Investigar técnicas de explicabilidade aplicadas a modelos de classificação de nódulos pulmonares, buscando compreender:
-
-> **Por que o modelo tomou determinada decisão e se as regiões destacadas por ele correspondem às regiões relevantes do nódulo.**
-
-O projeto não busca apenas verificar se o modelo acerta, mas também analisar **como e onde o modelo está tomando suas decisões**.
-
----
-
-## 🧪 Estado atual do projeto
-
-**Status: Em desenvolvimento — foco Grad-CAM por CNN**
-
-O fluxo principal compara arquiteturas de CNN em crops LIDC 64×64 e gera mapas Grad-CAM por *slot*.
-
-| Slot | Notebook | Artefatos |
-|------|----------|-----------|
-| `custom_cnn` | [`notebooks/01-custom-cnn.ipynb`](notebooks/01-custom-cnn.ipynb) | `models/custom_cnn/`, `gradcam/custom_cnn/` |
-| `resnet18` | [`notebooks/02-resnet18.ipynb`](notebooks/02-resnet18.ipynb) (stub) | `models/resnet18/`, `gradcam/resnet18/` |
-| `efficientnet_b0` | [`notebooks/03-efficientnet-b0.ipynb`](notebooks/03-efficientnet-b0.ipynb) (stub) | `models/efficientnet_b0/`, `gradcam/efficientnet_b0/` |
-| ResNet50 (André) | [`notebooks/03-resnet50-sprint3.ipynb`](notebooks/03-resnet50-sprint3.ipynb) | `models/resnet50/`, `gradcam/resnet50/`, `outputs/sprint3/` |
-
-O notebook longo de baseline continua em [`notebooks/01-lung-nodule-malignancy-classification.ipynb`](notebooks/01-lung-nodule-malignancy-classification.ipynb). Uma cópia anterior está em [`notebooks/archive/`](notebooks/archive/).
-
-Contrato por slot: `best_model.pth`, `training_history.csv`, `test_predictions.csv`, `test_results.csv` em `models/<slot>/`; overlays em `gradcam/<slot>/`.
-
-O notebook monolítico antigo (semantic + fusion + SHAP) está em [`notebooks/archive/`](notebooks/archive/). O pacote reutilizável de Grad-CAM fica em [`src/xai/`](src/xai/).
-
----
-
-## 🗂️ Dataset
-
-O dataset principal é o **LIDC-IDRI**. Os arquivos brutos **não** entram no Git (`data/` no `.gitignore`).
-
-O pipeline usa crops 64×64 dos nódulos em `outputs/crops/` (compartilhados entre slots). DICOM pode ser apagado depois da extração.
-
-Para aumentar o conjunto em lotes (recomendado: 25 pacientes, teto de ~8 GB):
+## Como rodar
 
 ```text
-python scripts/expand_lidc_dataset.py plan --batch-size 25 --max-gb 8
-python scripts/expand_lidc_dataset.py run --batch-size 25 --max-gb 8
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-O comando `run` baixa o XML oficial, baixa só CT dos próximos pacientes, extrai crops e apaga DICOMs. Pacientes listados em `gradcam/*/gradcam_selected_cases.csv` podem ser preservados com `--keep-xai-patients`.
+1. Coloque o checkpoint em `models/resnet50_v2/best_model.pth` (pesos não entram no Git).
+2. Garanta DICOM local em `data/LIDC-IDRI/` e os CSVs já gerados em `outputs/sprint5/` (ou regenere com os scripts do pipeline).
+3. Abra e execute **Run All** em `notebooks/pipeline_entrega.ipynb`.
 
-**Como rodar o experimento principal:**
-
-1. Abra `notebooks/01-custom-cnn.ipynb` e execute **Run All** (treino ImageCNN + Grad-CAM).
-2. Se `models/custom_cnn/best_model.pth` já existir, o treino é pulado automaticamente.
-
-Legacy (semantic / image / fusion multi-modelo): `scripts/train_from_crops.py` e `notebooks/02-train-from-crops.ipynb` — fora do fluxo Grad-CAM por slot.
-
-Comandos avulsos do expand: `download-xml`, `download`, `extract`, `cleanup`. Use `--dry-run` para ver o lote sem baixar.
+O notebook **não retreina**. Ele carrega a ResNet50 v2, aplica o tratamento de dados do pipeline v2, gera Grad-CAM e Integrated Gradients em uma amostra do teste e, no final, mostra tabelas, gráficos e overlays com a ROI do radiologista.
 
 ---
 
-## 🔬 Abordagem planejada
+## Pipeline v2 (resumo)
 
-A ideia inicial do projeto pode ser resumida no seguinte fluxo:
+| Etapa | Decisão |
+|------|---------|
+| Dados | LIDC-IDRI, split por paciente **559** (391 / 84 / 84), seed 42 |
+| Rótulo | consenso por nódulo físico; maligno se média ≥ 3,5; ambíguos (2,5–3,5) fora do treino/val |
+| Crop | **64 mm** centrados na ROI → **224×224**, HU [-1000, 400] |
+| Modelo | ResNet50 (ImageNet) → 2 classes — `models/resnet50_v2/` |
+| XAI | Grad-CAM (`layer4`) + Integrated Gradients (+ baselines aleatório e centrado) |
+| Métricas | IoU / Dice (limiar da validação), Pointing Game (±4,3 mm), distância do pico |
+
+Figuras e índice da entrega: [`docs/entrega/`](docs/entrega/). Scripts de reprodução: `scripts/sprint5_*.py`, `scripts/sprint6_*.py`.
+
+---
+
+## Estrutura
 
 ```text
-LIDC-IDRI
-    ↓
-Pré-processamento das imagens
-    ↓
-Modelo de classificação
-    ↓
-Predição
-    ↓
-Técnicas de XAI
-    ↓
-Mapas de calor / ativação
-    ↓
-Comparação com máscaras dos nódulos
-    ↓
-Avaliação das explicações
+notebooks/pipeline_entrega.ipynb   ← entrega
+models/resnet50_v2/                ← config + histórico (+ checkpoint local)
+src/xai/                           ← Grad-CAM reutilizável
+scripts/                           ← reprodução do pipeline / XAI
+docs/entrega/                      ← figuras e índice da entrega final
+auditoria_dataset/                 ← auditoria do split/rótulo
+archive/                           ← material legado (inclui notas antigas por sprint)
+data/                              ← LIDC local (gitignored)
+outputs/                           ← manifests, métricas, cache (gitignored)
 ```
 
-O **Grad-CAM** será utilizado como baseline, enquanto pelo menos um método adicional deverá ser investigado para comparação.
+Material antigo (CNN custom, fusion, stubs, notas de sprint, etc.) está em [`archive/`](archive/README.md).
 
 ---
 
-## 📊 Métricas planejadas
+## Resultado (leitura curta)
 
-As principais métricas e avaliações definidas inicialmente são:
+Com crops centrados no nódulo, IoU alto **sozinho** não prova localização: o mapa centrado (sem aprendizado) passa de IoU 0,40. No teste do v2 (provisório), Grad-CAM e IG ficam abaixo desse baseline; o Grad-CAM frequentemente destaca pleura/parede. A pergunta do projeto exige comparar com o centrado e com os testes de deslocamento / Adebayo.
 
-| Avaliação                        | Objetivo                                                                |
-| -------------------------------- | ----------------------------------------------------------------------- |
-| **IoU**                          | Verificar a sobreposição entre o mapa de ativação e a máscara do nódulo |
-| **Teste de Sanidade de Adebayo** | Verificar se a explicação realmente depende do modelo                   |
-| **ECE**                          | Avaliar a calibração das probabilidades do modelo                       |
-| **Comparação entre métodos**     | Verificar diferenças entre as técnicas de XAI                           |
-
-A documentação do projeto estabelece **IoU ≥ 0,40** como meta inicial e considera IoU e o teste de sanidade como avaliações prioritárias.
+Figuras: [`docs/entrega/figures/`](docs/entrega/figures/).
 
 ---
 
-## 🛠️ Tecnologias em estudo
+## Observação
 
-As principais tecnologias e bibliotecas consideradas neste momento são:
+Projeto acadêmico. Resultados **provisórios** (uma semente, sem ensemble). Não usar para diagnóstico clínico.
 
-* **Python**
-* **PyTorch**
-* **Torchvision**
-* **NumPy**
-* **Matplotlib**
-* **scikit-learn**
-* **pydicom**
-* **SimpleITK**
-* **pylidc**
-* **3D Slicer**
-
-Essas ferramentas serão utilizadas conforme as necessidades das próximas etapas do projeto.
-
----
-
-## 📚 Metodologia
-
-O projeto segue o framework **KDD (Knowledge Discovery in Databases)**, passando pelas etapas de:
-
-**Seleção → Pré-processamento → Transformação → Mineração → Interpretação**
-
-No momento, o grupo encontra-se principalmente nas etapas iniciais de **seleção, preparação e estudo dos dados e métodos**.
-
----
-
-## ⚠️ Observação
-
-Este é um **projeto acadêmico em desenvolvimento**. Os métodos, ferramentas e estrutura apresentados neste README representam o estado atual do planejamento e poderão ser modificados conforme os experimentos e estudos avancem.
-
-Os resultados deste projeto não devem ser utilizados para diagnóstico ou tomada de decisões médicas reais.
-
----
-
-**Tema:** Processamento de Imagens de Câncer de Pulmão
-**Foco:** Explainable AI (XAI) e visualização de decisões de modelos de IA
+**Tema:** Processamento de imagens de câncer de pulmão · **Foco:** XAI (Grad-CAM + IG)

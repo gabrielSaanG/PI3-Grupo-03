@@ -1,0 +1,12 @@
+{
+  "architecture": "ImageCNN (scripts/train_from_crops.py), 1 channel, 224x224",
+  "epochs": 5,
+  "batch_size": 32,
+  "lr": 0.001,
+  "weight_decay": 0.0001,
+  "pos_weight": 0.42632552404438967,
+  "seed": 42,
+  "best_epoch": 2,
+  "best_val_auc_patch": 0.6650805566982037,
+  "split": "559 patients (391/84/84), seed 42"
+}

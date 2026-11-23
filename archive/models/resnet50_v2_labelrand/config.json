@@ -1,0 +1,14 @@
+{
+  "purpose": "Adebayo label randomization for resnet50_v2 (provisional)",
+  "labels": "v2 consensus labels permuted across physical nodules inside train and inside validation (ambiguous excluded, as in v2); all patches of a nodule share the drawn label",
+  "permutation_seed": 42,
+  "recipe": "same as models/resnet50_v2 (crop 64 mm, augmentation, weighted CE, AdamW, cosine)",
+  "epochs": 5,
+  "selection": "none (last epoch)",
+  "lr": 0.0001,
+  "batch_size": 16,
+  "train_patches": 11893,
+  "val_patches": 2638,
+  "torch": "2.11.0+cu128",
+  "gpu": "NVIDIA GeForce RTX 3050 Laptop GPU"
+}

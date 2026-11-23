@@ -1,0 +1,7 @@
+data: 2026-10-26T20:31:05
+python: 3.13.2 | pandas: 3.0.5 | numpy: 2.5.2
+sistema: Windows-11-10.0.22631-SP0
+LIMIAR_MALIGNO=3.5 AMBIGUO=(2.5, 3.5) SHA256_ESPERADO=d6c22d88d1c0
+PASTA_LIDC: configurada
+divisão: não encontrado
+previsões: não encontrado

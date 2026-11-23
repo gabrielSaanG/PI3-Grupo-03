@@ -32,6 +32,10 @@ gradcam/**/*.png
 gradcam/**/*.jpg
 gradcam/**/*.jpeg
 !gradcam/**/.gitkeep
+archive/gradcam/**/*.png
+archive/gradcam/**/*.jpg
+archive/gradcam/**/*.jpeg
+!archive/gradcam/**/.gitkeep
 
 # DICOM / medical imaging binaries if they appear outside data/
 *.dcm
@@ -40,3 +44,6 @@ gradcam/**/*.jpeg
 
 # Local notes / exports (Notion, personal annotations)
 docs/anotations/
+
+# Large local dumps / zips
+*.zip
