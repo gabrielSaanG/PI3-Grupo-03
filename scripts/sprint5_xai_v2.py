@@ -41,7 +41,7 @@ from sprint5_retrain_resnet50 import CROP_MM, IMAGE_SIZE, extract_crop
 from src.xai.gradcam import GradCAM
 
 CKPT = ROOT / "models" / "resnet50_v2" / "best_model.pth"
-FIG_DIR = ROOT / "docs" / "sprint5" / "figures"
+FIG_DIR = ROOT / "docs" / "entrega" / "figures"
 MAPS = ["gradcam", "ig", "random", "center"]
 MAP_NAMES = {"gradcam": "Grad-CAM", "ig": "Integrated Gradients", "random": "Aleatório", "center": "Centrado"}
 THRESHOLDS = np.round(np.arange(0.1, 0.95, 0.1), 2)

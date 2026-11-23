@@ -32,7 +32,7 @@ from sprint5_xai_v2 import MAP_NAMES, PG_TOLERANCE_PX, center_map, normalise, to
 from src.xai.gradcam import GradCAM
 
 OUT = ROOT / "outputs" / "sprint6"
-FIG_DIR = ROOT / "docs" / "sprint6" / "figures"
+FIG_DIR = ROOT / "docs" / "entrega" / "figures"
 V2_CKPT = ROOT / "models" / "resnet50_v2" / "best_model.pth"
 MM_PER_PX = CROP_MM / IMAGE_SIZE
 TAGS = {"train": "train", "validation": "val", "test": "test"}

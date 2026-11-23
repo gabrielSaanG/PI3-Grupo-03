@@ -19,7 +19,7 @@ pip install -r requirements.txt
 ```
 
 1. Coloque o checkpoint em `models/resnet50_v2/best_model.pth` (pesos não entram no Git).
-2. Garanta DICOM local em `data/LIDC-IDRI/` e os CSVs já gerados em `outputs/sprint5/` (ou regenere com os scripts da Sprint 5).
+2. Garanta DICOM local em `data/LIDC-IDRI/` e os CSVs já gerados em `outputs/sprint5/` (ou regenere com os scripts do pipeline).
 3. Abra e execute **Run All** em `notebooks/pipeline_entrega.ipynb`.
 
 O notebook **não retreina**. Ele carrega a ResNet50 v2, aplica o tratamento de dados do pipeline v2, gera Grad-CAM e Integrated Gradients em uma amostra do teste e, no final, mostra tabelas, gráficos e overlays com a ROI do radiologista.
@@ -37,7 +37,7 @@ O notebook **não retreina**. Ele carrega a ResNet50 v2, aplica o tratamento de 
 | XAI | Grad-CAM (`layer4`) + Integrated Gradients (+ baselines aleatório e centrado) |
 | Métricas | IoU / Dice (limiar da validação), Pointing Game (±4,3 mm), distância do pico |
 
-Detalhe experimental: `docs/sprint5/`, `docs/sprint6/`. Scripts de reprodução: `scripts/sprint5_*.py`, `scripts/sprint6_*.py`.
+Figuras e índice da entrega: [`docs/entrega/`](docs/entrega/). Scripts de reprodução: `scripts/sprint5_*.py`, `scripts/sprint6_*.py`.
 
 ---
 
@@ -47,23 +47,23 @@ Detalhe experimental: `docs/sprint5/`, `docs/sprint6/`. Scripts de reprodução:
 notebooks/pipeline_entrega.ipynb   ← entrega
 models/resnet50_v2/                ← config + histórico (+ checkpoint local)
 src/xai/                           ← Grad-CAM reutilizável
-scripts/sprint5_*.py, sprint6_*.py
-docs/sprint5/, docs/sprint6/
+scripts/                           ← reprodução do pipeline / XAI
+docs/entrega/                      ← figuras e índice da entrega final
 auditoria_dataset/                 ← auditoria do split/rótulo
-archive/                           ← notebooks, modelos e scripts legados
+archive/                           ← material legado (inclui notas antigas por sprint)
 data/                              ← LIDC local (gitignored)
 outputs/                           ← manifests, métricas, cache (gitignored)
 ```
 
-Material antigo (CNN custom, fusion, stubs, etc.) está em [`archive/`](archive/README.md).
+Material antigo (CNN custom, fusion, stubs, notas de sprint, etc.) está em [`archive/`](archive/README.md).
 
 ---
 
 ## Resultado (leitura curta)
 
-Com crops centrados no nódulo, IoU alto **sozinho** não prova localização: o mapa centrado (sem aprendizado) passa de IoU 0,40. No teste do v2 (provisório), Grad-CAM e IG ficam abaixo desse baseline; o Grad-CAM frequentemente destaca pleura/parede. A pergunta do projeto exige comparar com o centrado e com os testes da Sprint 6 (deslocamento / Adebayo).
+Com crops centrados no nódulo, IoU alto **sozinho** não prova localização: o mapa centrado (sem aprendizado) passa de IoU 0,40. No teste do v2 (provisório), Grad-CAM e IG ficam abaixo desse baseline; o Grad-CAM frequentemente destaca pleura/parede. A pergunta do projeto exige comparar com o centrado e com os testes de deslocamento / Adebayo.
 
-Números e figuras: `docs/sprint5/gabriel_validacao_estatistica.md`, `docs/sprint5/figures/`.
+Figuras: [`docs/entrega/figures/`](docs/entrega/figures/).
 
 ---
 

@@ -26,7 +26,7 @@ import pydicom
 from sprint5_predictions import OUT, ROOT, SEED, run_notebook_until_split
 from sprint5_retrain_resnet50 import CROP_MM, IMAGE_SIZE, extract_crop
 
-FIG_DIR = ROOT / "docs" / "sprint5" / "figures"
+FIG_DIR = ROOT / "docs" / "entrega" / "figures"
 CASES_PER_ROW = 3
 V1_MARGIN = 20
 

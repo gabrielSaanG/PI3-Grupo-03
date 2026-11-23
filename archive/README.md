@@ -14,3 +14,4 @@ O fluxo oficial da entrega está em:
 | `models/` | Checkpoints e artefatos de modelos que não são a ResNet50 v2 |
 | `scripts/` | Scripts de treino/preview fora do pipeline v2 |
 | `gradcam/` | Overlays antigos por slot de modelo |
+| `docs/` | Notas e reviews por sprint (fora da pasta de entrega) |
